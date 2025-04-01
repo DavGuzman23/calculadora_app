@@ -1,13 +1,219 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4a90e2, #9b59b6, #e74c3c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.calculator-title {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease-out;
+}
+
+.calculator-display {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.operation {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+}
+
+.calculator-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.2rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.calculator-input:focus {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.calculator-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.calculator-button {
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-button:active {
+    transform: translateY(0);
+}
+
+.button-primary {
+    background: rgba(52, 152, 219, 0.8);
+}
+
+.button-primary:hover {
+    background: rgba(52, 152, 219, 1);
+}
+
+.button-danger {
+    background: rgba(231, 76, 60, 0.8);
+}
+
+.button-danger:hover {
+    background: rgba(231, 76, 60, 1);
+}
+
+.button-success {
+    background: rgba(46, 204, 113, 0.8);
+}
+
+.button-success:hover {
+    background: rgba(46, 204, 113, 1);
+}
+
+.button-warning {
+    background: rgba(241, 196, 15, 0.8);
+}
+
+.button-warning:hover {
+    background: rgba(241, 196, 15, 1);
+}
+
+.button-secondary {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.button-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* Estilos para el input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Media Queries para Responsive */
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 20px;
+    }
+
+    .calculator-title {
+        font-size: 1.5rem;
+    }
+
+    .calculator-display {
+        font-size: 2rem;
+    }
+
+    .calculator-button {
+        padding: 12px;
+        font-size: 1rem;
+    }
 }
